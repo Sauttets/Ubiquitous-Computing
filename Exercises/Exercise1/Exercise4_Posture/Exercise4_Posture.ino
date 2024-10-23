@@ -28,7 +28,7 @@ void loop() {
   if (IMU.temperatureAvailable()) {
     temperature_deg = 0;
     IMU.readTemperature(temperature_deg);
-   digitalWrite(LEDR, temperature_deg <= 25 ? HIGH : LOW);
+   digitalWrite(LEDR, temperature_deg > 25 ? HIGH : LOW);
   }
 
   float ax, ay, az;

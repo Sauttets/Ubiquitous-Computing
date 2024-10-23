@@ -3,10 +3,8 @@
 #include <WiFiNINA.h>
 #include <PDM.h>
 
-Madgwick MwFilter;
+Madgwick MgFilter;
 unsigned long microsPerReading, microsPrevious;
-
-// noise variables
 static const char channels = 1;
 static const int frequency = 16000;
 short sampleBuffer[512];
@@ -16,18 +14,14 @@ volatile int samplesRead;
 unsigned long blinkInterval = 500;
 unsigned long previousMillisRed = 0;
 unsigned long previousMillisBlue = 0;
-unsigned long previousMillisGreen = 0;
 unsigned long redBlinkEndTime = 0;
 unsigned long blueBlinkEndTime = 0;
-unsigned long greenBlinkEndTime = 0;
-bool ledRedState = LOW;
-bool ledBlueState = LOW;
-bool ledGreenState = LOW;
+bool ledRedState = false;
+bool ledBlueState = false;
 
 void setup() {
   pinMode(LEDB, OUTPUT);
   pinMode(LEDR, OUTPUT);
-  pinMode(LEDG, OUTPUT);
   Serial.begin(9600);
 
   // Start the IMU
@@ -35,14 +29,13 @@ void setup() {
     Serial.println("Failed to initialize IMU!");
     while (1);
   }
-
   PDM.onReceive(onPDMdata);
   if (!PDM.begin(channels, frequency)) {
     Serial.println("Failed to start PDM!");
     while (1);
   }
 
-  MwFilter.begin(25);
+  MgFilter.begin(25);
 
   // Initialize variables to pace updates to the correct rate
   microsPerReading = 1000000 / 25;
@@ -50,51 +43,43 @@ void setup() {
 }
 
 void loop() {
-  int temperature_deg = 0;
   float ax, ay, az;
   float gx, gy, gz;
-  float pitch;
-  unsigned long currentMillis = millis();
+  float roll, pitch, heading;
   unsigned long microsNow;
+  unsigned long currentMillis = millis();
 
-  if (IMU.temperatureAvailable()) {
-    IMU.readTemperature(temperature_deg);
-
-    if (temperature_deg <= 25) {
-      redBlinkEndTime = millis() + 10000;
-    }
-  }
-
+  // Check if it's time to read data and update the filter
   microsNow = micros();
   if (microsNow - microsPrevious >= microsPerReading) {
 
     // Read accelerometer and gyroscope data from LSM6DSOX
     if (IMU.readAcceleration(ax, ay, az) && IMU.readGyroscope(gx, gy, gz)) {
-      MwFilter.updateIMU(gx, gy, gz, ax, ay, az);
-      pitch = MwFilter.getPitch();
+      MgFilter.updateIMU(gx, gy, gz, ax, ay, az);
+      pitch = MgFilter.getPitch();
 
-      if (pitch < 80.0) {
+      // Print the orientation (heading, pitch, roll)
+      Serial.print("Orientation: ");
+      Serial.print(pitch);
+      Serial.println();
+
+      if(abs(pitch) < 80.0){
         blueBlinkEndTime = millis() + 10000;
       }
+      // Increment previous time, so we keep proper pace
       microsPrevious = microsPrevious + microsPerReading;
     }
   }
 
-
   if (samplesRead) {
     for (int i = 0; i < samplesRead; i++) {
       Serial.println(sampleBuffer[i]);
-      if (sampleBuffer[i] > abs(10000)) {
-          greenBlinkEndTime = millis() + 10000;
+      if (abs(sampleBuffer[i]) > 10000){
+        redBlinkEndTime = millis() + 10000;
       }
     }
-
-    // Clear the read count
     samplesRead = 0;
   }
-
-  printStats(temperature_deg, pitch);
-
   // Blink Red LED
   if (currentMillis < redBlinkEndTime) {
     if (currentMillis - previousMillisRed >= blinkInterval) {
@@ -117,26 +102,12 @@ void loop() {
     digitalWrite(LEDB, LOW);
   }
 
-
-  // Blink Blue LED
-  if (currentMillis < greenBlinkEndTime) {
-    if (currentMillis - previousMillisGreen >= blinkInterval) {
-      previousMillisGreen = currentMillis;
-      ledGreenState = !ledGreenState;
-      digitalWrite(LEDG, ledGreenState ? HIGH : LOW);
-    }
-  } else {
+  if(currentMillis > blueBlinkEndTime && currentMillis > redBlinkEndTime){
+    digitalWrite(LEDG, HIGH);
+  } else{
     digitalWrite(LEDG, LOW);
   }
-}
 
-void printStats(int temp, float pitch) {
-  Serial.print("Temperature = ");
-  Serial.print(temp);
-  Serial.print("°C");
-  Serial.print("  Pitch = ");
-  Serial.print(pitch);
-  Serial.println();
 }
 
 void onPDMdata() {
