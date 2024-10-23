@@ -1,1 +1,1 @@
-awesome readme
+This is the Repository for all exercises of Ubiquitous Computing

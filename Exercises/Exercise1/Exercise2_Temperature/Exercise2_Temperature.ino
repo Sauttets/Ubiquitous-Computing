@@ -22,22 +22,9 @@ void loop() {
     Serial.print("°C");
     Serial.println();
     
-    if(temperature_deg =< 25){
-      digitalWrite(LEDB, HIGH);
-    } else{
-      digitalWrite(LEDB, LOW);
-    }
+    digitalWrite(LEDB, temperature_deg <= 25 ? HIGH : LOW);
+    digitalWrite(LEDG, (temperature_deg >= 20 && temperature_deg <= 36) ? HIGH : LOW);
+    digitalWrite(LEDR, temperature_deg >= 32 ? HIGH : LOW);
 
-    if(20 =< temperature_deg =< 36){
-      digitalWrite(LEDG, HIGH);
-    } else {
-      digitalWrite(LEDG, LOW);
-    }
-
-    if(temperature_deg >= 32){
-      digitalWrite(LEDR, HIGH); 
-    } else {
-      digitalWrite(LEDR, LOW);
-    }
   }
 }
