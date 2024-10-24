@@ -22,6 +22,7 @@ bool ledBlueState = false;
 void setup() {
   pinMode(LEDB, OUTPUT);
   pinMode(LEDR, OUTPUT);
+  pinMode(LEDG, OUTPUT);
   Serial.begin(9600);
 
   // Start the IMU
@@ -58,12 +59,9 @@ void loop() {
       MgFilter.updateIMU(gx, gy, gz, ax, ay, az);
       pitch = MgFilter.getPitch();
 
-      // Print the orientation (heading, pitch, roll)
-      Serial.print("Orientation: ");
-      Serial.print(pitch);
-      Serial.println();
-
       if(abs(pitch) < 80.0){
+        Serial.print("Bad Posture. FIX NOW: ");
+        Serial.println(pitch);
         blueBlinkEndTime = millis() + 10000;
       }
       // Increment previous time, so we keep proper pace
@@ -73,9 +71,10 @@ void loop() {
 
   if (samplesRead) {
     for (int i = 0; i < samplesRead; i++) {
-      Serial.println(sampleBuffer[i]);
       if (abs(sampleBuffer[i]) > 10000){
         redBlinkEndTime = millis() + 10000;
+        Serial.print("Noise levels to high: " );
+        Serial.println(abs(sampleBuffer[i]));
       }
     }
     samplesRead = 0;
