@@ -23,18 +23,15 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 430,
+        "x": 610,
         "y": 180,
         "wires": [
             [
                 "07d7823ba4e1aced",
                 "1850f2554ca9b1b0",
-                "d5541fa69839c8fb",
-                "cc596e248f714b15",
-                "235f33ca68b131db",
                 "fd9cd181ba2a4e76",
-                "ac4f5e615c807b85",
-                "fcab99696beeab0d"
+                "fcab99696beeab0d",
+                "1522acf12e589606"
             ]
         ]
     },
@@ -92,8 +89,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 850,
-        "y": 320,
+        "x": 1030,
+        "y": 300,
         "wires": []
     },
     {
@@ -108,8 +105,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 650,
-        "y": 320,
+        "x": 830,
+        "y": 260,
         "wires": [
             [
                 "05d61cdbff8a4d2e",
@@ -134,8 +131,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 230,
-        "y": 440,
+        "x": 410,
+        "y": 360,
         "wires": [
             [
                 "d06af7a3a8533deb",
@@ -162,8 +159,8 @@
         "color": "#717171",
         "wrapText": false,
         "className": "",
-        "x": 420,
-        "y": 420,
+        "x": 600,
+        "y": 340,
         "wires": []
     },
     {
@@ -183,8 +180,8 @@
         "output": "payload",
         "outputType": "msg",
         "outTz": "Europe/Berlin",
-        "x": 460,
-        "y": 460,
+        "x": 640,
+        "y": 380,
         "wires": [
             [
                 "043366d91b708063"
@@ -203,8 +200,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 650,
-        "y": 460,
+        "x": 830,
+        "y": 380,
         "wires": [
             [
                 "e3324a4d6bd4c2a6"
@@ -228,8 +225,8 @@
         "output": "payload",
         "outputType": "msg",
         "outTz": "Europe/Berlin",
-        "x": 460,
-        "y": 500,
+        "x": 640,
+        "y": 420,
         "wires": [
             [
                 "767fb980470e84db"
@@ -254,8 +251,8 @@
         "color": "#717171",
         "wrapText": false,
         "className": "",
-        "x": 820,
-        "y": 460,
+        "x": 1000,
+        "y": 380,
         "wires": []
     },
     {
@@ -276,8 +273,8 @@
         "color": "#717171",
         "wrapText": false,
         "className": "",
-        "x": 700,
-        "y": 500,
+        "x": 880,
+        "y": 420,
         "wires": []
     },
     {
@@ -292,71 +289,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 660,
-        "y": 240,
+        "x": 840,
+        "y": 180,
         "wires": [
             [
                 "5c224cac39dd610e"
-            ]
-        ]
-    },
-    {
-        "id": "d5541fa69839c8fb",
-        "type": "function",
-        "z": "430b82b8ea54f2a6",
-        "name": "extract pressure",
-        "func": "msg.payload = msg.payload.main.pressure;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 660,
-        "y": 160,
-        "wires": [
-            [
-                "79021b612636fa53"
-            ]
-        ]
-    },
-    {
-        "id": "cc596e248f714b15",
-        "type": "function",
-        "z": "430b82b8ea54f2a6",
-        "name": "extract lat",
-        "func": "msg.payload = msg.payload.coord.lat;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 640,
-        "y": 120,
-        "wires": [
-            [
-                "898f2bb5b64e946a"
-            ]
-        ]
-    },
-    {
-        "id": "235f33ca68b131db",
-        "type": "function",
-        "z": "430b82b8ea54f2a6",
-        "name": "extract lon",
-        "func": "msg.payload = msg.payload.coord.lon;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 650,
-        "y": 80,
-        "wires": [
-            [
-                "c287fb882418db4d"
             ]
         ]
     },
@@ -372,8 +309,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 670,
-        "y": 280,
+        "x": 850,
+        "y": 220,
         "wires": [
             [
                 "cd46da30a4bb8b22"
@@ -391,7 +328,7 @@
         "height": 3,
         "gtype": "gauge-half",
         "gstyle": "needle",
-        "title": "wind speed",
+        "title": "Wind Speed",
         "units": "units",
         "icon": "",
         "prefix": "",
@@ -458,8 +395,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 870,
-        "y": 280,
+        "x": 1050,
+        "y": 220,
         "wires": []
     },
     {
@@ -469,7 +406,7 @@
         "group": "98b070c9c18c3ca1",
         "name": "humidity",
         "label": "humidity",
-        "order": 10,
+        "order": 7,
         "chartType": "line",
         "category": "topic",
         "categoryType": "msg",
@@ -491,7 +428,7 @@
         "stackSeries": false,
         "pointShape": "circle",
         "pointRadius": 4,
-        "showLegend": true,
+        "showLegend": false,
         "removeOlder": 1,
         "removeOlderUnit": "3600",
         "removeOlderPoints": "",
@@ -518,8 +455,8 @@
         "height": "5",
         "className": "",
         "interpolation": "linear",
-        "x": 860,
-        "y": 240,
+        "x": 1040,
+        "y": 180,
         "wires": [
             []
         ]
@@ -531,7 +468,7 @@
         "group": "98b070c9c18c3ca1",
         "name": "temperature",
         "label": "temperature",
-        "order": 11,
+        "order": 8,
         "chartType": "line",
         "category": "topic",
         "categoryType": "msg",
@@ -553,7 +490,7 @@
         "stackSeries": false,
         "pointShape": "circle",
         "pointRadius": 4,
-        "showLegend": true,
+        "showLegend": false,
         "removeOlder": 1,
         "removeOlderUnit": "3600",
         "removeOlderPoints": "",
@@ -580,119 +517,11 @@
         "height": "5",
         "className": "",
         "interpolation": "linear",
-        "x": 870,
-        "y": 360,
+        "x": 1050,
+        "y": 260,
         "wires": [
             []
         ]
-    },
-    {
-        "id": "ac4f5e615c807b85",
-        "type": "function",
-        "z": "430b82b8ea54f2a6",
-        "name": "extract clouds",
-        "func": "msg.payload = msg.payload.clouds.all;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 660,
-        "y": 200,
-        "wires": [
-            [
-                "58f95ae2e666eeac"
-            ]
-        ]
-    },
-    {
-        "id": "c287fb882418db4d",
-        "type": "ui-text",
-        "z": "430b82b8ea54f2a6",
-        "group": "98b070c9c18c3ca1",
-        "order": 6,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "lon: ",
-        "format": "{{msg.payload}}",
-        "layout": "row-left",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "x": 850,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "898f2bb5b64e946a",
-        "type": "ui-text",
-        "z": "430b82b8ea54f2a6",
-        "group": "98b070c9c18c3ca1",
-        "order": 7,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "lat: ",
-        "format": "{{msg.payload}}",
-        "layout": "row-left",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "x": 850,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "14a5f7dcc4286473",
-        "type": "ui-text",
-        "z": "430b82b8ea54f2a6",
-        "group": "98b070c9c18c3ca1",
-        "order": 9,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "pressure: ",
-        "format": "{{msg.payload}}",
-        "layout": "row-left",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "x": 1060,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "be289fa587076c6c",
-        "type": "ui-text",
-        "z": "430b82b8ea54f2a6",
-        "group": "98b070c9c18c3ca1",
-        "order": 8,
-        "width": 0,
-        "height": 0,
-        "name": "clouds",
-        "label": "cloud coverage: ",
-        "format": "{{msg.payload}}",
-        "layout": "row-left",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "x": 1050,
-        "y": 200,
-        "wires": []
     },
     {
         "id": "fcab99696beeab0d",
@@ -706,36 +535,9 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 480,
-        "y": 60,
+        "x": 820,
+        "y": 100,
         "wires": []
-    },
-    {
-        "id": "58f95ae2e666eeac",
-        "type": "change",
-        "z": "430b82b8ea54f2a6",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "msg.payload & \"%\"",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 890,
-        "y": 200,
-        "wires": [
-            [
-                "be289fa587076c6c"
-            ]
-        ]
     },
     {
         "id": "8225e0c3a94addda",
@@ -754,7 +556,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 230,
+        "x": 410,
         "y": 180,
         "wires": [
             [
@@ -763,29 +565,44 @@
         ]
     },
     {
-        "id": "79021b612636fa53",
-        "type": "change",
+        "id": "8d764e4f3f6e6f0c",
+        "type": "ui-text",
         "z": "430b82b8ea54f2a6",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "msg.payload & \" hPa\"",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 890,
-        "y": 160,
+        "group": "98b070c9c18c3ca1",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "location note",
+        "label": "Weather",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 1050,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "1522acf12e589606",
+        "type": "function",
+        "z": "430b82b8ea54f2a6",
+        "name": "status text",
+        "func": "var lon = msg.payload.coord.lon;\nvar lat = msg.payload.coord.lat;\nvar pressure = msg.payload.main.pressure;\nvar clouds = msg.payload.clouds.all;\nvar city = msg.payload.name\nmsg.payload = `Weather in ${city} at ${lon}, ${lat}, is ${clouds}% Cloudy with a Pressure of: ${pressure} hPa, `;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 140,
         "wires": [
             [
-                "14a5f7dcc4286473"
+                "8d764e4f3f6e6f0c"
             ]
         ]
     },
@@ -834,7 +651,7 @@
                 "cols": "12"
             }
         ],
-        "order": 1,
+        "order": 2,
         "className": "",
         "visible": "true",
         "disabled": "false"
