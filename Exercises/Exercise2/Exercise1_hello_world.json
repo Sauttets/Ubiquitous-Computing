@@ -1,0 +1,52 @@
+[
+    {
+        "id": "2fa59b84a94c72f1",
+        "type": "tab",
+        "label": "Exercise1_hello_world",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2f9a28af2f8612e6",
+        "type": "inject",
+        "z": "2fa59b84a94c72f1",
+        "name": "hello_world",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Hello World!",
+        "payloadType": "str",
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "08936e759bfbb574"
+            ]
+        ]
+    },
+    {
+        "id": "08936e759bfbb574",
+        "type": "debug",
+        "z": "2fa59b84a94c72f1",
+        "name": "debug_print",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 330,
+        "y": 80,
+        "wires": []
+    }
+]

@@ -1,0 +1,877 @@
+[
+    {
+        "id": "430b82b8ea54f2a6",
+        "type": "tab",
+        "label": "Exercise5_weather_dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c2d447fd8dfaea9e",
+        "type": "http request",
+        "z": "430b82b8ea54f2a6",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.openweathermap.org/data/2.5/weather?lat=47.6603&lon=9.1758&appid=",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 430,
+        "y": 180,
+        "wires": [
+            [
+                "07d7823ba4e1aced",
+                "1850f2554ca9b1b0",
+                "d5541fa69839c8fb",
+                "cc596e248f714b15",
+                "235f33ca68b131db",
+                "fd9cd181ba2a4e76",
+                "ac4f5e615c807b85",
+                "fcab99696beeab0d"
+            ]
+        ]
+    },
+    {
+        "id": "05d61cdbff8a4d2e",
+        "type": "ui-gauge",
+        "z": "430b82b8ea54f2a6",
+        "name": "temp",
+        "group": "98b070c9c18c3ca1",
+        "order": 4,
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#004cff"
+            },
+            {
+                "from": "0",
+                "color": "#00b3ff"
+            },
+            {
+                "from": "5",
+                "color": "#00ffe1"
+            },
+            {
+                "from": "10",
+                "color": "#00ff59"
+            },
+            {
+                "from": "15",
+                "color": "#eeff00"
+            },
+            {
+                "from": "25",
+                "color": "#ff8800"
+            },
+            {
+                "from": "30",
+                "color": "#ff0000"
+            }
+        ],
+        "min": "-10",
+        "max": "60",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 850,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "07d7823ba4e1aced",
+        "type": "function",
+        "z": "430b82b8ea54f2a6",
+        "name": "extract temp",
+        "func": "msg.payload = msg.payload.main.temp - 273,15;\nmsg.payload = Math.round(msg.payload * 100) / 100;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 320,
+        "wires": [
+            [
+                "05d61cdbff8a4d2e",
+                "9a9227a3c3521335"
+            ]
+        ]
+    },
+    {
+        "id": "4e03ae3c0bba6ba6",
+        "type": "inject",
+        "z": "430b82b8ea54f2a6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 440,
+        "wires": [
+            [
+                "d06af7a3a8533deb",
+                "c3a2e795ba94b9a2",
+                "0866b0133579b26c"
+            ]
+        ]
+    },
+    {
+        "id": "d06af7a3a8533deb",
+        "type": "ui-text",
+        "z": "430b82b8ea54f2a6",
+        "group": "98b070c9c18c3ca1",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "EPOCH",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 420,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c3a2e795ba94b9a2",
+        "type": "moment",
+        "z": "430b82b8ea54f2a6",
+        "name": "",
+        "topic": "",
+        "input": "payload",
+        "inputType": "msg",
+        "inTz": "Europe/Berlin",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "DD/MM/YYYY",
+        "locale": "de_DE",
+        "output": "payload",
+        "outputType": "msg",
+        "outTz": "Europe/Berlin",
+        "x": 460,
+        "y": 460,
+        "wires": [
+            [
+                "043366d91b708063"
+            ]
+        ]
+    },
+    {
+        "id": "043366d91b708063",
+        "type": "rbe",
+        "z": "430b82b8ea54f2a6",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 650,
+        "y": 460,
+        "wires": [
+            [
+                "e3324a4d6bd4c2a6"
+            ]
+        ]
+    },
+    {
+        "id": "0866b0133579b26c",
+        "type": "moment",
+        "z": "430b82b8ea54f2a6",
+        "name": "",
+        "topic": "",
+        "input": "payload",
+        "inputType": "msg",
+        "inTz": "Europe/Berlin",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "dddd, MMMM DD, YYYY hh:mm",
+        "locale": "de_DE",
+        "output": "payload",
+        "outputType": "msg",
+        "outTz": "Europe/Berlin",
+        "x": 460,
+        "y": 500,
+        "wires": [
+            [
+                "767fb980470e84db"
+            ]
+        ]
+    },
+    {
+        "id": "e3324a4d6bd4c2a6",
+        "type": "ui-text",
+        "z": "430b82b8ea54f2a6",
+        "group": "98b070c9c18c3ca1",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Date Time Format 1",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 820,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "767fb980470e84db",
+        "type": "ui-text",
+        "z": "430b82b8ea54f2a6",
+        "group": "98b070c9c18c3ca1",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Date Time Format 2",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 700,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1850f2554ca9b1b0",
+        "type": "function",
+        "z": "430b82b8ea54f2a6",
+        "name": "extract humidity",
+        "func": "msg.payload = msg.payload.main.humidity;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 240,
+        "wires": [
+            [
+                "5c224cac39dd610e"
+            ]
+        ]
+    },
+    {
+        "id": "d5541fa69839c8fb",
+        "type": "function",
+        "z": "430b82b8ea54f2a6",
+        "name": "extract pressure",
+        "func": "msg.payload = msg.payload.main.pressure;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 160,
+        "wires": [
+            [
+                "79021b612636fa53"
+            ]
+        ]
+    },
+    {
+        "id": "cc596e248f714b15",
+        "type": "function",
+        "z": "430b82b8ea54f2a6",
+        "name": "extract lat",
+        "func": "msg.payload = msg.payload.coord.lat;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 120,
+        "wires": [
+            [
+                "898f2bb5b64e946a"
+            ]
+        ]
+    },
+    {
+        "id": "235f33ca68b131db",
+        "type": "function",
+        "z": "430b82b8ea54f2a6",
+        "name": "extract lon",
+        "func": "msg.payload = msg.payload.coord.lon;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 80,
+        "wires": [
+            [
+                "c287fb882418db4d"
+            ]
+        ]
+    },
+    {
+        "id": "fd9cd181ba2a4e76",
+        "type": "function",
+        "z": "430b82b8ea54f2a6",
+        "name": "extract wind speed",
+        "func": "msg.payload = msg.payload.wind.speed;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 280,
+        "wires": [
+            [
+                "cd46da30a4bb8b22"
+            ]
+        ]
+    },
+    {
+        "id": "cd46da30a4bb8b22",
+        "type": "ui-gauge",
+        "z": "430b82b8ea54f2a6",
+        "name": "wind speed",
+        "group": "98b070c9c18c3ca1",
+        "order": 5,
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "wind speed",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#00a800"
+            },
+            {
+                "from": "1.5",
+                "color": "#00e645"
+            },
+            {
+                "from": "3",
+                "color": "#00ff04"
+            },
+            {
+                "from": "5.5",
+                "color": "#99ff00"
+            },
+            {
+                "from": "8",
+                "color": "#b0f000"
+            },
+            {
+                "from": "11",
+                "color": "#eeff00"
+            },
+            {
+                "from": "14",
+                "color": "#fbff00"
+            },
+            {
+                "from": "17",
+                "color": "#ffdd00"
+            },
+            {
+                "from": "21",
+                "color": "#ffae00"
+            },
+            {
+                "from": "24",
+                "color": "#ff7300"
+            },
+            {
+                "from": "28",
+                "color": "#ff2600"
+            },
+            {
+                "from": "33",
+                "color": "#d60000"
+            },
+            {
+                "from": "35",
+                "color": "#cc0000"
+            }
+        ],
+        "min": 0,
+        "max": "35",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 870,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5c224cac39dd610e",
+        "type": "ui-chart",
+        "z": "430b82b8ea54f2a6",
+        "group": "98b070c9c18c3ca1",
+        "name": "humidity",
+        "label": "humidity",
+        "order": 10,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "%",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "3",
+        "height": "5",
+        "className": "",
+        "interpolation": "linear",
+        "x": 860,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9a9227a3c3521335",
+        "type": "ui-chart",
+        "z": "430b82b8ea54f2a6",
+        "group": "98b070c9c18c3ca1",
+        "name": "temperature",
+        "label": "temperature",
+        "order": 11,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "°C",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "3",
+        "height": "5",
+        "className": "",
+        "interpolation": "linear",
+        "x": 870,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ac4f5e615c807b85",
+        "type": "function",
+        "z": "430b82b8ea54f2a6",
+        "name": "extract clouds",
+        "func": "msg.payload = msg.payload.clouds.all;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 200,
+        "wires": [
+            [
+                "58f95ae2e666eeac"
+            ]
+        ]
+    },
+    {
+        "id": "c287fb882418db4d",
+        "type": "ui-text",
+        "z": "430b82b8ea54f2a6",
+        "group": "98b070c9c18c3ca1",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "lon: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 850,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "898f2bb5b64e946a",
+        "type": "ui-text",
+        "z": "430b82b8ea54f2a6",
+        "group": "98b070c9c18c3ca1",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "lat: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 850,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "14a5f7dcc4286473",
+        "type": "ui-text",
+        "z": "430b82b8ea54f2a6",
+        "group": "98b070c9c18c3ca1",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "pressure: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 1060,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "be289fa587076c6c",
+        "type": "ui-text",
+        "z": "430b82b8ea54f2a6",
+        "group": "98b070c9c18c3ca1",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "clouds",
+        "label": "cloud coverage: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 1050,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fcab99696beeab0d",
+        "type": "debug",
+        "z": "430b82b8ea54f2a6",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "58f95ae2e666eeac",
+        "type": "change",
+        "z": "430b82b8ea54f2a6",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload & \"%\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 200,
+        "wires": [
+            [
+                "be289fa587076c6c"
+            ]
+        ]
+    },
+    {
+        "id": "8225e0c3a94addda",
+        "type": "inject",
+        "z": "430b82b8ea54f2a6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "c2d447fd8dfaea9e"
+            ]
+        ]
+    },
+    {
+        "id": "79021b612636fa53",
+        "type": "change",
+        "z": "430b82b8ea54f2a6",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload & \" hPa\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 160,
+        "wires": [
+            [
+                "14a5f7dcc4286473"
+            ]
+        ]
+    },
+    {
+        "id": "98b070c9c18c3ca1",
+        "type": "ui-group",
+        "name": "Exercise 5",
+        "page": "d36ab877b911303b",
+        "width": "6",
+        "height": "3",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "d36ab877b911303b",
+        "type": "ui-page",
+        "name": "Exercise 5",
+        "ui": "d2b172e3c387b521",
+        "path": "/page2",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "3247abde41c591f8",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "d2b172e3c387b521",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "showPageTitle": true,
+        "navigationStyle": "default",
+        "titleBarStyle": "default"
+    },
+    {
+        "id": "3247abde41c591f8",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    }
+]

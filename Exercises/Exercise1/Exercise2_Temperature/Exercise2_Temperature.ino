@@ -15,7 +15,8 @@ void setup() {
 void loop() {
   if (IMU.temperatureAvailable()) {
     int temperature_deg = 0;
-    IMU.readTemperature(temperature_deg);
+    //IMU.readTemperature(temperature_deg);
+    temperature_deg = 26;
 
     Serial.print("Temperature = ");
     Serial.print(temperature_deg);
@@ -25,6 +26,5 @@ void loop() {
     digitalWrite(LEDB, temperature_deg < 25 ? HIGH : LOW);
     digitalWrite(LEDG, (temperature_deg > 20 && temperature_deg < 36) ? HIGH : LOW);
     digitalWrite(LEDR, temperature_deg > 32 ? HIGH : LOW);
-
   }
 }

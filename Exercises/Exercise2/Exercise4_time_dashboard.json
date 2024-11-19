@@ -1,0 +1,312 @@
+[
+    {
+        "id": "f57ea8321492f202",
+        "type": "tab",
+        "label": "Exercise4_time_dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d212fbc993b74c3d",
+        "type": "inject",
+        "z": "f57ea8321492f202",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 120,
+        "wires": [
+            [
+                "3fe211d9f55a46f5",
+                "3c02adb2707d3f33",
+                "2ebfcf246b688927",
+                "de93fe98d2ffd220"
+            ]
+        ]
+    },
+    {
+        "id": "3fe211d9f55a46f5",
+        "type": "ui-text",
+        "z": "f57ea8321492f202",
+        "group": "88ff71c5abd5ef4c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "EPOCH",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 600,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "3c02adb2707d3f33",
+        "type": "debug",
+        "z": "f57ea8321492f202",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "2ebfcf246b688927",
+        "type": "moment",
+        "z": "f57ea8321492f202",
+        "name": "",
+        "topic": "",
+        "input": "payload",
+        "inputType": "msg",
+        "inTz": "Europe/Berlin",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "DD/MM/YYYY",
+        "locale": "de_DE",
+        "output": "payload",
+        "outputType": "msg",
+        "outTz": "Europe/Berlin",
+        "x": 640,
+        "y": 160,
+        "wires": [
+            [
+                "05d13440101620d2",
+                "8c4adf19daae7a56"
+            ]
+        ]
+    },
+    {
+        "id": "05d13440101620d2",
+        "type": "debug",
+        "z": "f57ea8321492f202",
+        "name": "debug: date_formatted",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "8c4adf19daae7a56",
+        "type": "rbe",
+        "z": "f57ea8321492f202",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 850,
+        "y": 120,
+        "wires": [
+            [
+                "0831c34e36614ece"
+            ]
+        ]
+    },
+    {
+        "id": "de93fe98d2ffd220",
+        "type": "moment",
+        "z": "f57ea8321492f202",
+        "name": "",
+        "topic": "",
+        "input": "payload",
+        "inputType": "msg",
+        "inTz": "Europe/Berlin",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "dddd, MMMM DD, YYYY hh:mm",
+        "locale": "de_DE",
+        "output": "payload",
+        "outputType": "msg",
+        "outTz": "Europe/Berlin",
+        "x": 640,
+        "y": 200,
+        "wires": [
+            [
+                "770d900197a0db42",
+                "16c433f6c73646bd"
+            ]
+        ]
+    },
+    {
+        "id": "770d900197a0db42",
+        "type": "debug",
+        "z": "f57ea8321492f202",
+        "name": "debug: date_long",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0831c34e36614ece",
+        "type": "ui-text",
+        "z": "f57ea8321492f202",
+        "group": "88ff71c5abd5ef4c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Date Time Format 1",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 1020,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "16c433f6c73646bd",
+        "type": "ui-text",
+        "z": "f57ea8321492f202",
+        "group": "88ff71c5abd5ef4c",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Date Time Format 2",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 900,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "88ff71c5abd5ef4c",
+        "type": "ui-group",
+        "name": "Exercise 4",
+        "page": "d5bf5882d044c59b",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "d5bf5882d044c59b",
+        "type": "ui-page",
+        "name": "Exercise 4",
+        "ui": "d2b172e3c387b521",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "3247abde41c591f8",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "d2b172e3c387b521",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "showPageTitle": true,
+        "navigationStyle": "default",
+        "titleBarStyle": "default"
+    },
+    {
+        "id": "3247abde41c591f8",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    }
+]

@@ -1,4 +1,4 @@
-.vscode
-.pages
+*.vscode
+*.pages
 .key
-.png
+*.png
